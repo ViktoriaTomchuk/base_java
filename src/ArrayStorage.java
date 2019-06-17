@@ -1,6 +1,6 @@
 /**
  * Array based storage for Resumes
- *Реализуйте класс ArrayStorage, организовав хранение резюме на основе массива с методами save, get,
+ * Реализуйте класс ArrayStorage, организовав хранение резюме на основе массива с методами save, get,
  * delete, size, clear, getAll
  * При этом храните все резюме в начале storage (без дырок в виде null), чтобы не перебирать
  * каждый раз все 10000 элементов
@@ -9,7 +9,7 @@
  * <----- size ----->
  * <------- storage.length (10000) ------->
  * Протестируйте вашу реализацию с помощью классов MainArray.main() и MainTestArrayStorage.main()
- *
+ * <p>
  * При реализации метода delete() сортировать резюме по uuid не требуется
  * Все резюме в хранилище имеют уникальный uuid, что исключает повторы
  * Давайте осмысленные комментарии коммитам
@@ -21,40 +21,82 @@
  * В методе clear() обнуление массива предполагает обнуление (null) ячеек, где хранятся Resume, а не
  * создание нового или присваивание ему null
  */
+
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10000];
+    private int size = 0;
 
     void clear() {
-        for (Resume resume : storage)
-            if (resume != null) {
-                resume = null;
-            }
+        for (int i = 0; i < size; i++) {
+            storage[i] = null;
+        }
+        size = 0;
     }
 
-    void save(Resume r) {
-        for (int i = 0; i < storage.length; i++) {
-            Resume resume = new Resume();
-            if (resume != null) {
-                storage[i] = resume;
-            }
+    public void update(Resume r) {
+        int index = getIndex(r.getUuid());
+        if (index == -1) {
+            System.out.println("Resume" + r.getUuid() + "not exist");
+        } else {
+            storage[index] = r;
         }
     }
 
-    String get(String uuid) {
-        return uuid;
+    void save(Resume r) {
+        int index = getIndex(r.getUuid());
+        if (index != -1) {
+            System.out.println("Resume" + r.getUuid() + "already exist");
+        } else if (size == storage.length) {
+            System.out.println("Storage overflow");
+        } else {
+            storage[size] = r;
+            size++;
+        }
+    }
+
+    Resume get(String uuid) {
+        int index = getIndex(uuid);
+        if (index == -1) {
+            System.out.println("Resume" + uuid + "not exist");
+            return null;
+        }
+        return storage[index];
     }
 
     void delete(String uuid) {
+        int index = getIndex(uuid);
+        if (index == -1) {
+            System.out.println("ERROR");
+        } else {
+            storage[index] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
+        }
+
     }
+
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return new Resume[0];
+        Resume[] result = new Resume[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = storage[i];
+        }
+        return result;
     }
 
     int size() {
-        return storage.length;
+        return size;
+    }
+
+    private int getIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (uuid == storage[i].getUuid()) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
