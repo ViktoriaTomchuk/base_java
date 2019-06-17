@@ -21,7 +21,6 @@
  * В методе clear() обнуление массива предполагает обнуление (null) ячеек, где хранятся Resume, а не
  * создание нового или присваивание ему null
  */
-
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size = 0;
