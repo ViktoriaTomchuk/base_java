@@ -26,7 +26,7 @@ public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size = 0;
 
-    void clear() {
+    public void clear() {
         for (int i = 0; i < size; i++) {
             storage[i] = null;
         }
@@ -42,7 +42,7 @@ public class ArrayStorage {
         }
     }
 
-    void save(Resume r) {
+    public void save(Resume r) {
         int index = getIndex(r.getUuid());
         if (index != -1) {
             System.out.println("Resume" + r.getUuid() + "already exist");
@@ -54,7 +54,7 @@ public class ArrayStorage {
         }
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index == -1) {
             System.out.println("Resume" + uuid + "not exist");
@@ -63,7 +63,7 @@ public class ArrayStorage {
         return storage[index];
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index == -1) {
             System.out.println("ERROR");
@@ -75,11 +75,10 @@ public class ArrayStorage {
 
     }
 
-
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         Resume[] result = new Resume[size];
         for (int i = 0; i < size; i++) {
             result[i] = storage[i];
@@ -87,7 +86,7 @@ public class ArrayStorage {
         return result;
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 
