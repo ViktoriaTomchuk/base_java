@@ -2,7 +2,7 @@ package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.model.SectionType;
 
-public class TestSingleton {
+public class  TestSingleton {
     private static TestSingleton ourInstance = new TestSingleton();
 
     public static TestSingleton Instance;
