@@ -2,6 +2,7 @@ package ru.javawebinar.basejava.model;
 
 import ru.javawebinar.basejava.storage.util.DateUtil;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ import java.util.Objects;
 import static ru.javawebinar.basejava.storage.util.DateUtil.NOW;
 import static ru.javawebinar.basejava.storage.util.DateUtil.of;
 
-public class Organization {
+public class Organization implements Serializable {
+    private static final long serialVerisonUID = 1L;
     private final Link homePage;
     private List<Position> positions = new ArrayList<>();
 
@@ -45,7 +47,7 @@ public class Organization {
         return "Organization{" + homePage + "," + positions + '}';
     }
 
-    public static class Position {
+    public static class Position implements Serializable{
         private final LocalDate startDate;
         private final LocalDate endDate;
         private final String title;
