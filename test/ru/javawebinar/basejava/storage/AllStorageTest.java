@@ -11,6 +11,10 @@ import ru.javawebinar.basejava.storage.*;
                 ListStorageTest.class,
                 MapUuidStorageTest.class,
                 MapResumeStorageTest.class,
+                ObjectFileStorageTest.class,
+                ObjectPathStorageTest.class,
+                XmlPathStorageTest.class,
+                JsonPathStorageTest.class
         })
 
 
