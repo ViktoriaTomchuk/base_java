@@ -15,7 +15,8 @@ import ru.javawebinar.basejava.storage.*;
                 ObjectPathStorageTest.class,
                 XmlPathStorageTest.class,
                 JsonPathStorageTest.class,
-                DataPathStorageTest.class
+                DataPathStorageTest.class,
+                SqlStorageTest.class
         })
 
 
